@@ -1,6 +1,7 @@
 const express = require('express'); //server framework 
 const mongoose = require('mongoose'); // DB Connection 
 const cors = require('cors'); // allow frontend access 
+require('dotenv').config(); // Load environment variables
 
 const app = express();  // app holds all api  process 
 
@@ -9,7 +10,7 @@ app.use(express.json());
 app.use(cors()); 
 
 // MongoDB Atlas Connection 
-mongoose.connect('mongodb+srv://Keerthana:%40Nunnari0712@cluster0.5xohaph.mongodb.net/?appName=Cluster0')
+mongoose.connect(process.env.MONGODB_URI)
 .then(() => console.log('Connected to MongoDB Atlas')) // ensure connection 
 .catch((err) => console.error('Error connecting to MongoDB Atlas:', err));
 
@@ -50,4 +51,4 @@ app.delete('/delete/:id', async (req, res) => {
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
-}); 
+});
